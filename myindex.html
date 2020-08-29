@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>淘宝商品切换</title>
+    <script src="./vue.js"></script>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <div id="app">
+        <div 
+        class="goods"
+        v-for="(goods,goodsIndex) in goodsList"
+        :key="goods.id"
+        >
+            <div class="title">{{ goods.title }}：</div>
+            <ul class="type-list">
+                <li 
+                class="type" 
+                :class="{active:typeIndex===goods.index}"
+                @click="addFilterHandle(typeIndex,goods,type,goodsIndex)"
+                v-for="(type,typeIndex) in goods.typeList" :key="type">{{ type }}</li>
+            </ul>
+        </div>
+        
+        <div
+        class="choose-type"
+        >
+        <div>已选条件：</div>
+        <span class="no-goods" v-if="!isgoods">
+            暂时没有选择过滤条件
+        </span>
+       <ul class="filter-list" v-else="isgoods">
+           <li v-for="(type,key) in showFilterGoods">{{ type }}
+               <svg  @click="deleteFilterGoods(key)" t="1598701381871" class="icon delete-goods" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2219" width="200" height="200"><path d="M153.998 113.778l756.224 756.224-40.22 40.22-756.224-756.224z" fill="#73777A" p-id="2220"></path><path d="M870.002 113.778l40.22 40.22-756.224 756.224-40.22-40.22z" fill="#73777A" p-id="2221"></path></svg>
+           </li>
+       </ul>
+        </div>
+    
+    </div>
+    <script>
+        const vm = new Vue({
+            el:"#app",
+            data:{
+                showFilterGoods:{},
+                isgoods:false,
+                goodsList: [
+                {
+                title: '上装',
+                typeList: ['全部', '针织衫', '毛呢外套', 'T恤', '羽绒服', '棉衣', '卫衣', '风衣' ],
+                id: 1,
+                },
+                {
+                title: '裤装',
+                typeList: ['全部', '牛仔裤', '小脚/铅笔裤', '休闲裤' ,'打底裤', '哈伦裤'],
+                id: 2,
+                },
+                {
+                title: '裙装',
+                typeList: ['全部', '连衣裙', '半身裙', '长袖连衣裙', '中长款连衣裙'],
+                id: 3,
+                }
+                ]
+            },
+            methods:{
+                addFilterHandle:function(index,goods,type,goodsIndex){
+                    if(type === '全部') {
+                       return;
+                      }
+                    this.isgoods=true;   
+                    goods.index = index;
+                    vm.$set(this.showFilterGoods,goodsIndex,type) 
+                    
+                },
+                deleteFilterGoods (goodsKey){
+                    this.$delete(this.showFilterGoods, goodsKey);
+                    this.goodsList[goodsKey].index = 0;
+                    // console.log(goodsKey)
+                    this.changeShowFilter();
+                },
+                changeShowFilter () {
+          const filterObjStr = JSON.stringify(this.showFilterGoods);
+        //   console.log(this.showFilterGoods )
+          this.isgoods =filterObjStr !== '{}';
+        }
+            }
+        })
+        vm.goodsList.forEach(item => vm.$set(item, 'index', 0));
+    </script>
+</body>
+</html>
