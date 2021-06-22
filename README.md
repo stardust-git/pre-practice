@@ -97,35 +97,6 @@ npm run serve
 
 npm run build
 ```
-## 页面截图
-
-**首页**
-
-![](https://raw.githubusercontent.com/hai-27/vue-store/master/public/screenshots/home.png)
-
-**全部商品**
-
-![](https://raw.githubusercontent.com/hai-27/vue-store/master/public/screenshots/goods.png)
-
-**购物车**
-
-![](https://raw.githubusercontent.com/hai-27/vue-store/master/public/screenshots/shoppingCart.png)
-
-**我的收藏**
-
-![](https://raw.githubusercontent.com/hai-27/vue-store/master/public/screenshots/collect.png)
-
-**我的订单**
-
-![](https://raw.githubusercontent.com/hai-27/vue-store/master/public/screenshots/order.png)
-
-**登录**
-
-![](https://raw.githubusercontent.com/hai-27/vue-store/master/public/screenshots/login.png)
-
-**注册**
-
-![](https://raw.githubusercontent.com/hai-27/vue-store/master/public/screenshots/register.png)
 
 
 
